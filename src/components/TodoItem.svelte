@@ -27,14 +27,14 @@
         { text }
     </span>
     <button class="is-button" on:click={toggleStatus}>
-      ✔️
+      ❌
     </button>
   {:else}
     <span>
         { text }
     </span>
     <button class="is-button" on:click={toggleStatus}>
-      ❌
+      ✔️
     </button>
   {/if}
 

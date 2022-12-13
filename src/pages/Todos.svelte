@@ -73,7 +73,7 @@
 <hr>
 
 <footer class="d-flex flex-row justify-content-center align-items-center">
-  <input class="mr-4" type="text" bind:value="{text}"> <button class="btn btn-outline-primary" on:click="{add}"> Agregar: <strong> { text } </strong> </button>
+  <input class="mr-4" type="text" bind:value="{text}"> <button class="btn btn-outline-primary" on:click="{add}" on:keypress.enter={add}> Agregar: <strong> { text } </strong> </button>
 </footer>
 
 

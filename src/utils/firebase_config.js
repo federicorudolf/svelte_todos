@@ -4,13 +4,13 @@ import { getFirestore, getDoc, setDoc, collection, deleteDoc, addDoc, updateDoc,
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBpsIp4nED2E7c4Pfe0HnSf7XyhzHxxelU",
-  authDomain: "todo-s-1802e.firebaseapp.com",
-  projectId: "todo-s-1802e",
-  storageBucket: "todo-s-1802e.appspot.com",
-  messagingSenderId: "498597625103",
-  appId: "1:498597625103:web:67d3c1100a711e496fd27a",
-  measurementId: "G-HEPSY6N258"
+  apiKey: "AIzaSyAZUVJbDbUdVUwvbo4-kNPAZcJYSHuAnrk",
+  authDomain: "sveltetodos-38ca8.firebaseapp.com",
+  projectId: "sveltetodos-38ca8",
+  storageBucket: "sveltetodos-38ca8.appspot.com",
+  messagingSenderId: "529551031111",
+  appId: "1:529551031111:web:b2ce18f29bee9b1300aa62",
+  measurementId: "G-TJCLJ1F2W1"
 };
 
 // Initialize Firebase
