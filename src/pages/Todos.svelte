@@ -7,7 +7,7 @@
   export let uid;
 
   let { firestore } = fb;
-  let text = 'Add new task';
+  let text = '';
 
   const todosRef = firestore.collection(firestore.firestore, 'todos');
   const q = firestore.query(todosRef, firestore.where('uid', '==', uid), firestore.orderBy('created'));
@@ -73,8 +73,12 @@
 <hr>
 
 <footer class="d-flex flex-row justify-content-center align-items-center">
-  <input class="mr-4" type="text" bind:value="{text}"> <button class="btn btn-outline-primary" on:click="{add}" on:keypress.enter={add}> Agregar: <strong> { text } </strong> </button>
+  <input placeholder="Add new task" class="mr-4"
+    type="text"
+    bind:value="{text}"
+    on:keypress={({key}) => key === 'Enter' ? add() : null}>
+  <button class="btn btn-outline-primary" on:click="{add}" >
+    Agregar: <strong> { text } </strong>
+  </button>
 </footer>
-
-
 <hr>

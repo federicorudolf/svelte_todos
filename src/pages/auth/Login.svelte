@@ -9,6 +9,7 @@
 
    function login() {
      const google = new GoogleAuthProvider()
+     console.log(google);
      signInWithPopup(auth, google)
       .then(res => console.log(res))
       .catch(err => console.log(err));
