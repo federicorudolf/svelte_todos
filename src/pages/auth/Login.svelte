@@ -15,15 +15,21 @@
       .catch(err => console.log(err));
    }
 
+   function logout() {
+    signOut(auth).then(() => {
+      user = null;
+    }).catch(err => console.log(err));
+   }
+
 </script>
 
 <section>
   {#if $user}
     <Profile { ...$user } />
-    <button class="btn btn-primary" on:click="{ () => signOut() }"> Logout </button>
+    <button class="btn btn-primary" on:click="{ () => logout() }"> Logout </button>
     <hr>
     <Todos uid="{$user.uid}" />
     {:else}
-    <button class="btn btn-danger" on:click="{login}"> Signin With Google </button>
+      <button class="btn btn-danger" on:click="{login}"> Signin With Google </button>
   {/if}
 </section>

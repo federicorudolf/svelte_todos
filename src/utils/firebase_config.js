@@ -23,7 +23,7 @@ export default {
     auth,
     GoogleAuthProvider,
     signInWithPopup,
-    signOut
+    signOut,
   },
   firestore: {
     firestore,

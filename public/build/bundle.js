@@ -24804,7 +24804,7 @@ var app = (function () {
         auth,
         GoogleAuthProvider,
         signInWithPopup,
-        signOut
+        signOut,
       },
       firestore: {
         firestore,
@@ -25957,7 +25957,7 @@ var app = (function () {
     const { console: console_1 } = globals;
     const file$1 = "src/pages/auth/Login.svelte";
 
-    // (26:4) {:else}
+    // (32:4) {:else}
     function create_else_block(ctx) {
     	let button;
     	let mounted;
@@ -25968,13 +25968,13 @@ var app = (function () {
     			button = element("button");
     			button.textContent = "Signin With Google";
     			attr_dev(button, "class", "btn btn-danger");
-    			add_location(button, file$1, 26, 4, 710);
+    			add_location(button, file$1, 32, 6, 829);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
 
     			if (!mounted) {
-    				dispose = listen_dev(button, "click", /*login*/ ctx[3], false, false, false);
+    				dispose = listen_dev(button, "click", /*login*/ ctx[2], false, false, false);
     				mounted = true;
     			}
     		},
@@ -25992,14 +25992,14 @@ var app = (function () {
     		block,
     		id: create_else_block.name,
     		type: "else",
-    		source: "(26:4) {:else}",
+    		source: "(32:4) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (21:2) {#if $user}
+    // (27:2) {#if $user}
     function create_if_block(ctx) {
     	let profile;
     	let t0;
@@ -26011,7 +26011,7 @@ var app = (function () {
     	let current;
     	let mounted;
     	let dispose;
-    	const profile_spread_levels = [/*$user*/ ctx[0]];
+    	const profile_spread_levels = [/*$user*/ ctx[1]];
     	let profile_props = {};
 
     	for (let i = 0; i < profile_spread_levels.length; i += 1) {
@@ -26021,7 +26021,7 @@ var app = (function () {
     	profile = new Profile({ props: profile_props, $$inline: true });
 
     	todos = new Todos({
-    			props: { uid: /*$user*/ ctx[0].uid },
+    			props: { uid: /*$user*/ ctx[1].uid },
     			$$inline: true
     		});
 
@@ -26036,8 +26036,8 @@ var app = (function () {
     			t3 = space();
     			create_component(todos.$$.fragment);
     			attr_dev(button, "class", "btn btn-primary");
-    			add_location(button, file$1, 22, 4, 572);
-    			add_location(hr, file$1, 23, 4, 657);
+    			add_location(button, file$1, 28, 4, 690);
+    			add_location(hr, file$1, 29, 4, 774);
     		},
     		m: function mount(target, anchor) {
     			mount_component(profile, target, anchor);
@@ -26055,13 +26055,13 @@ var app = (function () {
     			}
     		},
     		p: function update(ctx, dirty) {
-    			const profile_changes = (dirty & /*$user*/ 1)
-    			? get_spread_update(profile_spread_levels, [get_spread_object(/*$user*/ ctx[0])])
+    			const profile_changes = (dirty & /*$user*/ 2)
+    			? get_spread_update(profile_spread_levels, [get_spread_object(/*$user*/ ctx[1])])
     			: {};
 
     			profile.$set(profile_changes);
     			const todos_changes = {};
-    			if (dirty & /*$user*/ 1) todos_changes.uid = /*$user*/ ctx[0].uid;
+    			if (dirty & /*$user*/ 2) todos_changes.uid = /*$user*/ ctx[1].uid;
     			todos.$set(todos_changes);
     		},
     		i: function intro(local) {
@@ -26092,7 +26092,7 @@ var app = (function () {
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(21:2) {#if $user}",
+    		source: "(27:2) {#if $user}",
     		ctx
     	});
 
@@ -26108,7 +26108,7 @@ var app = (function () {
     	const if_blocks = [];
 
     	function select_block_type(ctx, dirty) {
-    		if (/*$user*/ ctx[0]) return 0;
+    		if (/*$user*/ ctx[1]) return 0;
     		return 1;
     	}
 
@@ -26119,7 +26119,7 @@ var app = (function () {
     		c: function create() {
     			section = element("section");
     			if_block.c();
-    			add_location(section, file$1, 19, 0, 515);
+    			add_location(section, file$1, 25, 0, 633);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -26183,18 +26183,28 @@ var app = (function () {
     }
 
     function instance$1($$self, $$props, $$invalidate) {
-    	let $user;
+    	let $user,
+    		$$unsubscribe_user = noop$2,
+    		$$subscribe_user = () => ($$unsubscribe_user(), $$unsubscribe_user = subscribe(user, $$value => $$invalidate(1, $user = $$value)), user);
+
+    	$$self.$$.on_destroy.push(() => $$unsubscribe_user());
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Login', slots, []);
     	const { auth, signInWithPopup, GoogleAuthProvider, signOut } = fb.auth;
     	let user = authState(auth);
     	validate_store(user, 'user');
-    	component_subscribe($$self, user, value => $$invalidate(0, $user = value));
+    	$$subscribe_user();
 
     	function login() {
     		const google = new GoogleAuthProvider();
     		console.log(google);
     		signInWithPopup(auth, google).then(res => console.log(res)).catch(err => console.log(err));
+    	}
+
+    	function logout() {
+    		signOut(auth).then(() => {
+    			$$subscribe_user($$invalidate(0, user = null));
+    		}).catch(err => console.log(err));
     	}
 
     	const writable_props = [];
@@ -26203,7 +26213,7 @@ var app = (function () {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console_1.warn(`<Login> was created with unknown prop '${key}'`);
     	});
 
-    	const click_handler = () => signOut();
+    	const click_handler = () => logout();
 
     	$$self.$capture_state = () => ({
     		Profile,
@@ -26216,18 +26226,19 @@ var app = (function () {
     		signOut,
     		user,
     		login,
+    		logout,
     		$user
     	});
 
     	$$self.$inject_state = $$props => {
-    		if ('user' in $$props) $$invalidate(2, user = $$props.user);
+    		if ('user' in $$props) $$subscribe_user($$invalidate(0, user = $$props.user));
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [$user, signOut, user, login, click_handler];
+    	return [user, $user, login, logout, click_handler];
     }
 
     class Login extends SvelteComponentDev {
