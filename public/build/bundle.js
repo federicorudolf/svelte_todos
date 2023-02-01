@@ -25968,7 +25968,7 @@ var app = (function () {
     			button = element("button");
     			button.textContent = "Signin With Google";
     			attr_dev(button, "class", "btn btn-danger");
-    			add_location(button, file$1, 32, 6, 829);
+    			add_location(button, file$1, 32, 6, 840);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -26036,8 +26036,8 @@ var app = (function () {
     			t3 = space();
     			create_component(todos.$$.fragment);
     			attr_dev(button, "class", "btn btn-primary");
-    			add_location(button, file$1, 28, 4, 690);
-    			add_location(hr, file$1, 29, 4, 774);
+    			add_location(button, file$1, 28, 4, 701);
+    			add_location(hr, file$1, 29, 4, 785);
     		},
     		m: function mount(target, anchor) {
     			mount_component(profile, target, anchor);
@@ -26119,7 +26119,7 @@ var app = (function () {
     		c: function create() {
     			section = element("section");
     			if_block.c();
-    			add_location(section, file$1, 25, 0, 633);
+    			add_location(section, file$1, 25, 0, 644);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -26203,7 +26203,7 @@ var app = (function () {
 
     	function logout() {
     		signOut(auth).then(() => {
-    			$$subscribe_user($$invalidate(0, user = null));
+    			$$subscribe_user($$invalidate(0, user = authState(auth)));
     		}).catch(err => console.log(err));
     	}
 

@@ -17,7 +17,7 @@
 
    function logout() {
     signOut(auth).then(() => {
-      user = null;
+      user = authState(auth);
     }).catch(err => console.log(err));
    }
 
